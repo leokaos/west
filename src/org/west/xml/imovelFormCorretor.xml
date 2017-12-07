@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="referencia" label="Referência" readOnly="true" colspan="1"/>
+        <property name="tipo" type="BEAN" bean="org.west.entidades.Tipo" mandatory="true" order="tipo" label="Categoria"/>
+        <property name="status" comboModelClass="org.west.utilitarios.ComboModels" comboModelMethod="getStatus" mandatory="true"/>
+        <property name="locacao" label="Locação?"/>
+    </line>
+    <line>
+        <property name="cep" type="CEP" mask="#####-###" mandatory="true" customValidator="org.west.componentes.ValidatorCep" dlu="45"/>
+        <property name="logradouro" type="SUJESTION" entity="org.west.entidades.Cep" field="descricao" mandatory="true"/>
+    </line>
+    <line>
+        <property name="numeros" label="Nº" mandatory="true" type="NUMERO_IMOVEL" separador="e"/>
+        <property name="apto" type="EDIT" label="Apto" format="STRING"/>
+        <property name="andar"/>
+        <property name="bloco" type="EDIT" label="Bloco/Casa"/>
+        <property name="bairro" type="BEAN" bean="org.west.entidades.Bairro" mandatory="true" label="Bairro"/>
+    </line>    
+    <line>
+        <property name="imediacoes" label="Imediações" mandatory="true"/>
+        <property name="zona" comboModelClass="org.west.utilitarios.ComboModels" comboModelMethod="getZona" mandatory="true" dlu="70"/>
+        <property name="cidade" readOnly="true" dlu="70"/>
+    </line>
+</beanDescriptor>

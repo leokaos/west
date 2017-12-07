@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor> 
+    <line>
+        <property name="endereco" readOnly="true" label="Endereço" colspan="2"/>
+    </line>
+    <line>
+        <property name="pastaMae" readOnly="true" label="PastaMãe"/>
+        <property name="obs" label="Protocolo/Registro" readOnly="true"/>
+    </line>
+</beanDescriptor>

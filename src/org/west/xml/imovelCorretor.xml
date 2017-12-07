@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="referencia" label="Referência" readOnly="true"/>
+        <property name="tipo" label="Tipo" readOnly="true"/>
+        <property name="valor" label="Valor" readOnly="true" numberFormat="R$ ###,###.00" dlu="50"/>
+    </line>
+    <line>
+        <property name="logradouro" readOnly="true" label="Endereço" colspan="4"/>
+        <property name="stringNumero" readOnly="true" label= "Nº"/>
+        <property name="status" type="COLOR_LABEL" color="Ativo;verde;Proposta;amarelo;Vendido;vermelho;Suspenso;cinza" dlu="40"/>
+    </line>
+    <line>
+        <property name="fotos" type="SLIDESHOW" label=" " tamanho="90"/>
+    </line>
+    <line>
+        <property name="dorms" label="Dorms" readOnly="true"/>
+        <property name="suites" label="Suítes" readOnly="true"/>
+        <property name="salas" readOnly="true"/>
+        <property name="banheiros" label="Banhs" readOnly="true"/>
+        <property name="garagens" label="Gars" readOnly="true"/>
+    </line>
+</beanDescriptor>

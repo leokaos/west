@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" dlu="55" readOnly="true" />
+        <property name="dataEntrada" label="Data de Entrada" dateFormat="dd/MM/yyyy HH:mm" readOnly="true" />
+    </line>
+    <line>
+        <property name="nome" label="Serviço" mandatory="true"/>
+    </line>
+    <line>
+        <property name="responsavel" label="Responsável" type="BEAN" bean="org.west.entidades.Usuario" mandatory="true" order="nome" query="nivel = 4"/>
+        <property name="tipoServico" label="Tipo" type="BEAN" dlu="180" bean="org.west.entidades.TipoServico" mandatory="true" query="id > 0 AND ativo = 1"/>
+    </line>
+    <line>
+        <property name="endereco"/>
+    </line>
+    <line>
+        <property name="formaPagamento" type="LARGE_TEXT"/>
+    </line>    
+    <line>
+        <property name="cliente" type="MULTIPLESFIELDS" label="Comprador/Vendedor" size="2" marcador=";" show="false"/>
+    </line>
+    <line>
+        <property name="telefone"/>
+    </line>    
+    <line>
+        <property name="obs" label="Informações Gerais (Protocolo/Registro/Seguradora)" type="TEXTAREA_LOCK" editable="true" rows="7"/>
+    </line>
+    <line>
+        <property name="pastaMae" label="Pasta Mãe"/>
+        <property name="valorBruto" label="Valor das Tarefas" type="DOUBLE"/>
+        <property name="valorLancamentos" label="Valor Líquido" type="DOUBLE"/>
+    </line>
+</beanDescriptor>

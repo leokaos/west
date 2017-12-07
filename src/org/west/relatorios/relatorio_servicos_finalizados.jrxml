@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_servicos_finalizados" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" isFloatColumnFooter="true" uuid="e3af7183-c104-4742-aa3b-fa7bdeead794">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="2.357947691000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DATA_RELATORIO" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.awt.Image"/>
+	<parameter name="MAPA" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<queryString>
+		<![CDATA[SELECT
+	L.dataLancamento AS dataLancamento,
+	L.descricao AS descricao,
+	L.saida AS saida,
+	L.entrada AS entrada,
+	S.codigo AS servico_codigo,
+	S.nome AS servico_nome,
+	U.grupo AS usuario_grupo
+
+FROM tab_lancamentos L
+
+INNER JOIN tab_servico S ON S.codigo = L.servico
+
+INNER JOIN tab_usuario U ON U.codigo = L.usuario
+
+WHERE L.dataLancamento BETWEEN '2010-12-01' AND '2010-12-13'
+
+ORDER BY L.dataLancamento;]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="responsavel" class="org.west.entidades.Usuario"/>
+	<field name="dataTermino" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="112" splitType="Stretch">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement uuid="3075fc44-dfad-4e9c-b327-3e571721ea43" x="20" y="7" width="501" height="80"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d42f1c97-3a2e-4586-919b-8cbbe8bd8a58" key="staticText-5" x="0" y="17" width="190" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serviços Finanalizados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="91652d87-cdc7-450e-9fce-afbf90a144f6" key="staticText-6" x="351" y="17" width="79" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expedido em:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement uuid="7cf0aa29-d63f-4369-bcb0-9d5e66a44d68" x="430" y="17" width="135" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATA_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b6a4f615-b459-4d44-b510-d9ba2a31ef19" key="staticText-1" x="0" y="0" width="33" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5135192f-441d-4a6e-8a63-3add9f803464" key="staticText-3" x="33" y="0" width="396" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da179584-8e67-4e4a-af7a-d840ca4fef8e" x="508" y="0" width="57" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Término]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="79945ac6-8d72-48e1-8f36-f019dc93f5c9" key="staticText-3" x="429" y="0" width="79" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField pattern="">
+				<reportElement uuid="09fbf53e-8071-456b-b630-f7e57855c301" mode="Opaque" x="0" y="0" width="33" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4488083c-b94d-4168-b991-94b69f63d702" mode="Opaque" x="33" y="0" width="396" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="ced7a188-8f15-49b7-a095-f39453dfcdcb" mode="Opaque" x="429" y="0" width="79" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{responsavel}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="8651ee1d-d594-4569-881a-78f9438a3146" mode="Opaque" x="508" y="0" width="57" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataTermino}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

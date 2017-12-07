@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="referencia" label="Referência" readOnly="true"/>
+        <property name="dorms" label="Dormitórios" readOnly="true"/>
+        <property name="suites" label="Suítes" readOnly="true"/>
+        <property name="garagens" label="Vagas" readOnly="true"/>        
+        <property name="valor" label="Valor do Imóvel" type="DOUBLE" mandatory="true" min="1"/>
+    </line>    
+    <line>
+        <property name="privativa" label="Área Privativa" />
+        <property name="medidas" label="Medidas do Terreno" type="MULTIPLESFIELDS" size="4" marcador="X" show="true" colspan="5"/>
+        <property name="tipo" type="BEAN" bean="org.west.entidades.Tipo" mandatory="true" order="tipo" label="Categoria"/>
+        <property name="bairro" type="BEAN" bean="org.west.entidades.Bairro" mandatory="true" order="nome" label="Bairro"/>
+    </line>
+    <line>
+        <property name="condominio" label="Condomínio" readOnly="true"/>
+        <property name="proprietarios" label="Proprietário" readOnly="true"/>
+        <property name="proprietarios1" label="Proprietário (Adicional)" readOnly="true"/>
+    </line>        
+</beanDescriptor>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" readOnly="true" dlu="55"/>
+    </line>
+    <line>
+        <property name="veiculo" label="Veículo" comboModelClass="org.west.utilitarios.ComboModels" comboModelMethod="getVeiculos" mandatory="true"/>
+        <property name="anuncio" label="Anúncio" comboModelClass="org.west.utilitarios.ComboModels" dependentProperty="veiculo"/>
+    </line>
+    <line>
+        <property name="imovel" mandatory="true" label="Imóvel"/>
+        <property name="valor" mandatory="true"/>
+    </line>    
+    <line>
+        <property name="usuario" label="Usuário" type="BEAN" bean="org.west.entidades.Usuario" query="nivel=2 and status=1 and bloqueado=0" order="nome"/>       
+    </line>
+    <line>
+        <property name="dataEntrada" mandatory="true" format="dd/MM/yyyy HH:mm"/>
+        <property name="prioridade" mandatory="true" dlu="55"/>        
+    </line>
+</beanDescriptor>

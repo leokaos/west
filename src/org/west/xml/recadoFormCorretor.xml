@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="entrada" label="Data de entrada" type="DATE" format="dd/MM/yyyy HH:mm"/>
+    </line>
+    <line>
+        <property name="descricao" type="TEXTAREA_LOCK" label="Descrição"/>
+    </line>
+</beanDescriptor>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="nome" label="Anúncio" readOnly="true"/>
+        <property name="veiculo" label="Veículo" type="BEAN" bean="org.west.entidades.Veiculo" readOnly="true"/>
+        <property name="usado" label="Tem prioridade na exibição" readOnly="true"/>
+        <property name="liberavel" label="Exige liberação do supervisor" readOnly="true"/>
+        <property name="informacaoAdicional" label="Exige informações adicionais" readOnly="true"/>
+    </line>
+</beanDescriptor>

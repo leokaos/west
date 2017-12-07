@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Nº Cliente" dlu="55"/>
+        <property name="nome"/>
+        <property name="telefone" />
+    </line>
+    <line>
+        <property name="imovel" label="Imóvel" dlu="40"/>
+        <property name="tipoAcompanhado" comboModelClass="org.west.utilitarios.ComboModels" comboModelMethod="getModelTipoAcompanhado"/>
+        <property name="historico" label="Histórico"/>
+    </line>
+    <line>
+        <property name="inicio" format="dd/MM/yyyy"/>
+        <property name="fim" format="dd/MM/yyyy"/>
+    </line>
+</beanDescriptor>

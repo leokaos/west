@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="folha_pagamento" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" isFloatColumnFooter="true">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="64"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="saldo" forecolor="#009900" fontSize="8">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{SALDO} <=0]]></conditionExpression>
+			<style forecolor="#FF3333"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="DATA_RELATORIO" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.awt.Image"/>
+	<parameter name="JRVALE" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\leo\\Documents\\NetBeansProjects\\West\\src\\Relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TIPO" class="java.lang.String"/>
+	<parameter name="NOME_COMPLETO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+
+  S.codigo as codigo,
+  S.nome as nome,
+  S.cliente as cliente,
+  (select sum(valor) from tab_tarefas where servico = S.codigo group by servico) as valorBruto,
+  (select sum(entrada) - sum(saida) from tab_lancamentos where servico = S.codigo group by servico) as valorLancamentos
+
+from tab_servico S
+
+  left join tab_tarefas T on T.servico = S.codigo
+
+    left join tab_lancamentos L on L.servico = S.codigo
+
+     where S.tipo = 4
+
+     group by S.codigo;]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="valorBruto" class="java.lang.Double"/>
+	<field name="valorLancamentos" class="java.lang.Double"/>
+	<variable name="SALDO" class="java.lang.Double" resetType="Group" resetGroup="Saldo">
+		<variableExpression><![CDATA[(($F{valorLancamentos} == null)?0:$F{valorLancamentos})]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<variable name="TOTAL_VALES" class="java.lang.Double">
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<variable name="TOTAL_SALDO" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{SALDO}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<variable name="SUBTOTAL" class="java.lang.Double">
+		<variableExpression><![CDATA[($P{TIPO}.equals("Assessoria")?$V{TOTAL_SALDO} * 0.32:
+($P{TIPO}.equals("Financiamento")?$V{REPORT_COUNT} * 100:
+$P{TIPO}.equals("Seguros")?$V{TOTAL_SALDO} / 3:0))]]></variableExpression>
+	</variable>
+	<group name="Saldo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96" splitType="Stretch">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="8" y="7" width="529" height="80"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-5" x="2" y="16" width="157" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folha de Pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="303" y="16" width="79" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expedido em:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="394" y="16" width="135" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{DATA_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="4" width="40" height="21" forecolor="#2A5F45"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="4" width="118" height="21" forecolor="#2A5F45"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="4" width="127" height="21" forecolor="#2A5F45"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="4" width="64" height="21" forecolor="#2A5F45"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tarefas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="4" width="79" height="21" forecolor="#2A5F45"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lançamentos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="3" y="4" width="40" height="13" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="47" y="4" width="118" height="13" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="170" y="4" width="127" height="13" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="303" y="4" width="64" height="13" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[(($F{valorBruto} == null)?0:$F{valorBruto})]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="374" y="4" width="79" height="13" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[(($F{valorLancamentos} == null)?0:$F{valorLancamentos})]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="saldo" x="471" y="3" width="66" height="14" backcolor="#CC0000"/>
+				<textElement>
+					<font fontName="Verdana" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{SALDO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="437" y="3" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="221" splitType="Stretch">
+			<line>
+				<reportElement x="306" y="189" width="210" height="1"/>
+			</line>
+			<line>
+				<reportElement x="25" y="190" width="210" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="25" y="194" width="210" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana"/>
+				</textElement>
+				<text><![CDATA[Grupo West]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="110" y="78" width="125" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{TOTAL_VALES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="110" y="49" width="125" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Verdana" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUBTOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="109" width="101" height="20" forecolor="#003733"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Liquido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="78" width="58" height="20" forecolor="#003733"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="49" width="86" height="20" forecolor="#003733"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Bruto:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="110" y="109" width="125" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[(($V{SUBTOTAL} == null)?0.0:$V{SUBTOTAL})
+
+-
+
+(($V{TOTAL_VALES} == null)?0.0:$V{TOTAL_VALES})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="306" y="194" width="210" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{NOME_COMPLETO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="19" width="58" height="20" forecolor="#003733"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="110" y="19" width="125" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{TOTAL_SALDO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="140" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="40" width="565" height="100"/>
+				<dataSourceExpression><![CDATA[$P{JRVALE}]]></dataSourceExpression>
+				<returnValue subreportVariable="SOMA_VALES" toVariable="TOTAL_VALES"/>
+				<subreportExpression class="java.net.URL"><![CDATA[getClass().getResource("org/west/relatorios/relatorio_vales.jasper")]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

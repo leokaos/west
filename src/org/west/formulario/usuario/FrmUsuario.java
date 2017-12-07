@@ -1,0 +1,295 @@
+package org.west.formulario.usuario;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
+import org.swingBean.actions.ApplicationAction;
+import org.swingBean.descriptor.GenericFieldDescriptor;
+import org.swingBean.descriptor.XMLDescriptorFactory;
+import org.swingBean.descriptor.look.LookProvider;
+import org.swingBean.gui.JActButton;
+import org.swingBean.gui.JBeanPanel;
+import org.swingBean.gui.wrappers.WrapperFactory;
+import org.west.componentes.CriptoManager;
+import org.west.componentes.LookWest;
+import org.west.componentes.WrapperAdd;
+import org.west.componentes.WrapperBean;
+import org.west.componentes.WrapperCep;
+import org.west.componentes.WrapperCheckBoxList;
+import org.west.componentes.WrapperColorLabel;
+import org.west.componentes.WrapperDuasLista;
+import org.west.componentes.WrapperEdit;
+import org.west.componentes.WrapperHidden;
+import org.west.componentes.WrapperImage;
+import org.west.componentes.WrapperInterval;
+import org.west.componentes.WrapperLabel;
+import org.west.componentes.WrapperList;
+import org.west.componentes.WrapperListAdd;
+import org.west.componentes.WrapperMaskedComboBox;
+import org.west.componentes.WrapperMedidas;
+import org.west.componentes.WrapperMultiplesFields;
+import org.west.componentes.WrapperNumeroImovel;
+import org.west.componentes.WrapperOutros;
+import org.west.componentes.WrapperSlideShow;
+import org.west.componentes.WrapperSpinner;
+import org.west.componentes.WrapperSujestion;
+import org.west.componentes.WrapperTelefone;
+import org.west.componentes.WrapperTextAdd;
+import org.west.componentes.WrapperTextArea;
+import org.west.componentes.WrapperTwoLists;
+import org.west.entidades.Usuario;
+import org.west.formulario.corretor.FrmCorretor;
+import org.west.formulario.documentacao.FrmDocumentos;
+import org.west.formulario.documentacao.FrmSupervisor;
+import org.west.formulario.gerente.FrmGerentes;
+import org.west.formulario.recepcao.FrmRecepcao;
+import org.west.utilitarios.Util;
+
+public class FrmUsuario extends javax.swing.JFrame {
+
+    static {
+
+        WrapperFactory.registerTypeMapping("CEP", WrapperCep.class);
+        WrapperFactory.registerTypeMapping("ADD", WrapperAdd.class);
+        WrapperFactory.registerTypeMapping("EDIT", WrapperEdit.class);
+        WrapperFactory.registerTypeMapping("LISTA", WrapperList.class);
+        WrapperFactory.registerTypeMapping("BEAN", WrapperBean.class);
+        WrapperFactory.registerTypeMapping("LABEL", WrapperLabel.class);
+        WrapperFactory.registerTypeMapping("IMAGE", WrapperImage.class);
+        WrapperFactory.registerTypeMapping("HIDDEN", WrapperHidden.class);
+        WrapperFactory.registerTypeMapping("TEXT_ADD", WrapperTextAdd.class);
+        WrapperFactory.registerTypeMapping("SPINNER", WrapperSpinner.class);
+        WrapperFactory.registerTypeMapping("LIST_ADD", WrapperListAdd.class);
+        WrapperFactory.registerTypeMapping("INTERVAL", WrapperInterval.class);
+        WrapperFactory.registerTypeMapping("TELEFONE", WrapperTelefone.class);
+        WrapperFactory.registerTypeMapping("TWOLISTS", WrapperTwoLists.class);
+        WrapperFactory.registerTypeMapping("SUJESTION", WrapperSujestion.class);
+        WrapperFactory.registerTypeMapping("SLIDESHOW", WrapperSlideShow.class);
+        WrapperFactory.registerTypeMapping("DUAS_LISTA", WrapperDuasLista.class);
+        WrapperFactory.registerTypeMapping("COLOR_LABEL", WrapperColorLabel.class);
+        WrapperFactory.registerTypeMapping("COMBO_DESCRICAO", WrapperOutros.class);
+        WrapperFactory.registerTypeMapping("TEXTAREA_LOCK", WrapperTextArea.class);
+        WrapperFactory.registerTypeMapping("LIST_WRAPPER", WrapperCheckBoxList.class);
+        WrapperFactory.registerTypeMapping("NUMERO_IMOVEL", WrapperNumeroImovel.class);
+        WrapperFactory.registerTypeMapping("MASKED_COMBO", WrapperMaskedComboBox.class);
+        WrapperFactory.registerTypeMapping("MULTIPLESFIELDS", WrapperMultiplesFields.class);
+        WrapperFactory.registerTypeMapping("MEDIDAS", WrapperMedidas.class);
+
+        WrapperFactory.registerDefaultParameter("readOnly", "LABEL");
+
+        LookProvider.setLook(new LookWest());
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("log.txt", true);
+            System.setOut(new PrintStream(fileOutputStream, true));
+            System.setErr(new PrintStream(fileOutputStream, true));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private String version = "6.18";
+    private JProgressBar pg;
+    private JActButton botaoLogin;
+    private JActButton botaoLimpar;
+
+    public FrmUsuario() {
+        initComponents();
+
+        setSize(400, 450);
+        setLocationRelativeTo(null);
+
+        ImageIcon logo = new ImageIcon(super.getClass().getResource("/org/west/imagens/logo.png"));
+        JLabel labelLogo = new JLabel(new ImageIcon(logo.getImage().getScaledInstance(200, 200, 4)), SwingConstants.CENTER);
+        labelLogo.setSize(400, 200);
+
+        GenericFieldDescriptor descritor = XMLDescriptorFactory.getFieldDescriptor(Usuario.class, "/org/west/xml/usuarioLogin.xml", "login");
+        final JBeanPanel panel = new JBeanPanel(Usuario.class, descritor);
+        panel.setBorder(null);
+
+        String usuario = Util.getPropriedade("west.user");
+
+        if (usuario != null) {
+            panel.setPropertyValue("nome", usuario);
+        }
+
+        final JPanel panelBotao = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        botaoLogin = new JActButton("Entrar", new ApplicationAction() {
+
+            @Override
+            public void execute() {
+
+                botaoLogin.setEnabled(false);
+                botaoLimpar.setEnabled(false);
+                panel.setEnable("nome", false);
+                panel.setEnable("senha", false);
+
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        try {
+                            int porcentagem = 19;
+
+                            pg.setVisible(true);
+                            pg.setString("Inicializando...");
+                            pg.setValue(pg.getValue() + porcentagem);
+
+                            Usuario atual = new Usuario();
+                            panel.populateBean(atual);
+
+                            pg.setString("Criptografando senha...");
+                            pg.setValue(pg.getValue() + porcentagem);
+                            atual.setSenha(CriptoManager.hash(atual.getSenha()));
+
+                            pg.setString("Validando Usuário...");
+                            atual = UsuarioControl.login(atual);
+                            pg.setValue(pg.getValue() + porcentagem);
+
+                            if (atual == null) {
+                                JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!", "Erro de login", 0);
+                            } else if (!atual.isStatus()) {
+                                JOptionPane.showMessageDialog(null, "Usuário não ativo!", "Erro de login", 0);
+                            } else {
+                                JFrame frm = null;
+
+                                pg.setString("Resgistrando usuário na sessão...");
+                                Thread.sleep(450);
+                                pg.setValue(pg.getValue() + porcentagem);
+
+                                pg.setString("Carregando janela principal...");
+                                pg.setValue(pg.getValue() + porcentagem);
+
+                                switch (atual.getNivel()) {
+                                    case Usuario.RECEPCAO:
+                                        frm = new FrmRecepcao();
+                                        break;
+                                    case Usuario.CORRETOR:
+                                        frm = new FrmCorretor();
+                                        break;
+                                    case Usuario.GESTOR_COMERCIAL:
+                                        frm = new FrmGerentes();
+                                        break;
+                                    case Usuario.ADMINISTRATIVO:
+                                        frm = new FrmDocumentos();
+                                        break;
+                                    case Usuario.GESTOR_ADMINISTRATIVO:
+                                        frm = new FrmSupervisor();
+                                }
+
+                                frm.setVisible(true);
+                                setVisible(false);
+                            }
+
+                            botaoLogin.setEnabled(true);
+                            botaoLimpar.setEnabled(true);
+                            panel.setEnable("nome", true);
+                            panel.setEnable("senha", true);
+
+                            pg.setValue(0);
+                            pg.setVisible(false);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
+
+        botaoLimpar = new JActButton("Limpar", new ApplicationAction() {
+
+            @Override
+            public void execute() {
+                panel.cleanForm();
+            }
+        });
+
+        panelBotao.add(botaoLogin);
+        panelBotao.add(botaoLimpar);
+
+        GridBagConstraints cons = new GridBagConstraints();
+
+        cons.anchor = 10;
+        cons.weightx = 1.0D;
+        cons.insets = new Insets(0, 15, 20, 15);
+
+        cons.gridx = 0;
+        cons.gridy = 0;
+        cons.ipady = 5;
+        cons.fill = GridBagConstraints.NONE;
+        getContentPane().add(labelLogo, cons);
+
+        cons.gridy = 1;
+        cons.ipady = 10;
+        cons.insets = new Insets(0, 100, 0, 100);
+        cons.fill = 2;
+        getContentPane().add(panel, cons);
+
+        cons.gridy = 2;
+        cons.ipady = 0;
+        cons.fill = GridBagConstraints.BOTH;
+        getContentPane().add(panelBotao, cons);
+
+        cons.gridy = 3;
+        cons.ipadx = 0;
+        cons.insets = new Insets(10, 10, 10, 10);
+        JPanel panelPG = new JPanel(new BorderLayout());
+        panelPG.setPreferredSize(new Dimension(0, 20));
+        pg = new JProgressBar();
+        pg.setVisible(false);
+        pg.setStringPainted(true);
+        panelPG.add(pg, BorderLayout.CENTER);
+        getContentPane().add(panelPG, cons);
+
+        cons.gridy = 4;
+        cons.ipady = 0;
+        cons.insets = new Insets(0, 100, 0, 100);
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.anchor = 10;
+
+        JLabel versao = new JLabel("Versão: " + this.version);
+        versao.setHorizontalAlignment(SwingConstants.CENTER);
+
+        getContentPane().add(versao, cons);
+
+        getRootPane().setDefaultButton(botaoLogin);
+    }
+
+    /*
+     public static void main(String args[]) {
+     java.awt.EventQueue.invokeLater(new Runnable() {
+
+     @Override
+     public void run() {
+     new FrmUsuario().setVisible(true);
+     }
+     });
+     }*/
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema West - Login");
+        setMinimumSize(new java.awt.Dimension(300, 470));
+        setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
+}

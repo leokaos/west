@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="nome" label="Nome" readOnly="true"/>
+    </line>
+</beanDescriptor>

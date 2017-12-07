@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="captacao" label="Captação:" readOnly="true"/>
+        <property name="usuario" label="Indicação" readOnly="true"/>
+    </line>
+    <line>
+        <property name="atualizado" label="Atualizado em:" readOnly="true"/>
+        <property name="atualizadoPor" label="Atualizado por:" readOnly="true"/>
+    </line>
+    <line>
+        <property name="divulgar"/>
+    </line>  
+</beanDescriptor>

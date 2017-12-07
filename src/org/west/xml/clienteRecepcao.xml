@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" readOnly="true" dlu="55"/>
+    </line>
+    <line>
+        <property name="nome" mandatory="true"/>
+        <property name="telefone" label="Telefone" mandatory="true"/>
+    </line>
+    <line>
+        <property name="email" label="E-Mail"/>
+    </line>    
+</beanDescriptor>

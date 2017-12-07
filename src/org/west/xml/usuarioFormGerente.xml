@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" readOnly="true" dllu="55"/>
+    </line>
+    <line>
+        <property name="nome" mandatory="true"/>
+    </line>
+    <line>
+        <property name="senha" type="PASSWORD" mandatory="true"/>
+    </line>
+    <line>
+        <property name="nivel" type="MASKED_COMBO" values="1;2;3;4;5" masked="Recepcionista;Corretor;Gerente Comercial;Documentação;Gerente Administrativo" mandatory="true"/>
+        <property name="status" label="Ativo" type="BOOLEAN"/>
+        <property name="supervisor" type="BOOLEAN"/>
+        <property name="coordenador" type="BOOLEAN"/>
+    </line>    
+    <line>
+        <property name="email" mandatory="true"/>
+    </line>
+    <line>
+        <property name="nomeCompleto" mandatory="true"/>
+    </line>
+</beanDescriptor>

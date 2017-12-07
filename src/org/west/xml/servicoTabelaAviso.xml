@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" readOnly="true" label="Nº" columnSize="30"/>
+        <property name="nome" label="Serviço" readOnly="true"/>
+        <property name="cliente" readOnly="true"/>
+    </line>
+</beanDescriptor>

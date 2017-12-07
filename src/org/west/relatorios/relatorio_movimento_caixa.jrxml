@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_movimento_caixa" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" isFloatColumnFooter="true">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="205"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DATA_RELATORIO" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.awt.Image"/>
+	<parameter name="MAPA" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUB_TOTAL" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT
+	L.dataLancamento AS dataLancamento,
+	L.descricao AS descricao,
+	L.saida AS saida,
+	L.entrada AS entrada,
+	S.codigo AS servico_codigo,
+	S.nome AS servico_nome,
+	U.grupo AS usuario_grupo
+
+FROM tab_lancamentos L
+
+INNER JOIN tab_servico S ON S.codigo = L.servico
+
+INNER JOIN tab_usuario U ON U.codigo = L.usuario
+
+WHERE L.dataLancamento BETWEEN '2010-12-01' AND '2010-12-13'
+
+ORDER BY L.dataLancamento;]]>
+	</queryString>
+	<field name="dataLancamento" class="java.util.Date"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="saida" class="java.lang.Double"/>
+	<field name="entrada" class="java.lang.Double"/>
+	<field name="servico_codigo" class="java.lang.Long"/>
+	<field name="servico_nome" class="java.lang.String"/>
+	<field name="usuario_grupo" class="java.lang.String"/>
+	<variable name="SUM_SAIDA" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{saida}]]></variableExpression>
+	</variable>
+	<variable name="SUM_ENTRADA" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{entrada}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_ENTRADA" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{entrada}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_SAIDA" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{saida}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="205" splitType="Stretch">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="20" y="7" width="501" height="80"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="3" y="97" width="149" height="21" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Saldo por área:]]></text>
+			</staticText>
+			<subreport isUsingCache="false">
+				<reportElement x="3" y="125" width="547" height="77"/>
+				<dataSourceExpression><![CDATA[$P{MAPA}]]></dataSourceExpression>
+				<subreportExpression class="java.net.URL"><![CDATA[getClass().getResource("/relatorios/relatorio_saldo.jasper")]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-5" x="3" y="17" width="190" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movimento de caixa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="324" y="17" width="79" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expedido em:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="415" y="17" width="135" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{DATA_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="3" y="6" width="44" height="21" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" x="387" y="6" width="88" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serviço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="74" y="6" width="111" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="6" width="64" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saída]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="209" y="6" width="64" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="488" y="6" width="62" height="17" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="3" y="8" width="60" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dataLancamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="74" y="8" width="111" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="209" y="8" width="64" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{entrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="296" y="8" width="64" height="12" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{saida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="488" y="8" width="62" height="12"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario_grupo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="387" y="8" width="88" height="12"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{servico_codigo}.toString() + " - " + $F{servico_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="63" y="7" width="84" height="20" forecolor="#003733"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subtotal:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="281" y="7" width="94" height="20"/>
+				<textElement>
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_SAIDA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="168" y="7" width="93" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_ENTRADA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="136" splitType="Stretch">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement x="230" y="11" width="173" height="28"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="18"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{SUB_TOTAL} + $V{TOTAL_ENTRADA} - $V{TOTAL_SAIDA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="63" y="11" width="158" height="28" forecolor="#2A5F45"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total do caixa:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="311" y="85" width="210" height="1"/>
+			</line>
+			<line>
+				<reportElement x="30" y="86" width="210" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="100" width="210" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana"/>
+				</textElement>
+				<text><![CDATA[Grupo West]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="100" width="210" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana"/>
+				</textElement>
+				<text><![CDATA[Cliente/Conferente]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="30" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" readOnly="true"/>
+    </line>
+    <line>
+        <property name="cep" type="CEP" mask="#####-###" customValidator="org.west.componentes.ValidatorCep" dlu="45" mandatory="true"/>
+        <property name="endereco" type="SUJESTION" entity="org.west.entidades.Cep" field="descricao" mandatory="true"/>
+    </line>
+    <line>
+        <property name="numero" label="Nº" mandatory="true"/>
+        <property name="bairro" type="BEAN" bean="org.west.entidades.Bairro" query="nome is not null" order="nome" label="Bairro" mandatory="true"/>
+        <property name="telefone"/>
+    </line>
+    <line>
+        <property name="edificio" label="Edifício" mandatory="true"/>
+        <property name="zelador" mandatory="true"/>
+        <property name="porteiro" mandatory="true"/>
+        <property name="usuario" label="Usuário" type="BEAN" bean="org.west.entidades.Usuario" query="nivel=2 and status=1" order="nome" mandatory="true"/>
+    </line>
+</beanDescriptor>

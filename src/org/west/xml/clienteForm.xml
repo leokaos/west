@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" readOnly="true" label="Código" dlu="50"/>
+        <property name="nome" colspan="3" mandatory="true"/>
+    </line>
+    <line>
+        <property name="CPF" mask="###.###.###-##" customValidator="org.west.componentes.ValidatorCPF"/>
+        <property name="CNPJ" mask="##.###.###/####-##" customValidator="org.west.componentes.ValidatorCNPJ"/>
+        <property name="RG"/>
+        <property name="dataNascimento" label="Data de Nascimento"/>        
+    </line>
+    <line>
+        <property name="profissao" label="Profissão" colspan="2"/>
+        <property name="estadoCivil" label="Estado Civil" type="BEAN" dlu="90" bean="org.west.entidades.EstadoCivil" mandatory="true" query="codigo != 0"/>
+        <property name="telefone" type="EDIT"/>
+    </line>
+</beanDescriptor>

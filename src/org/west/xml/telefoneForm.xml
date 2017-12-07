@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" type="HIDDEN" label="" dlu="0" colspan="0"/>
+        <property name="tipo" type="COMBO" comboList="Celular;Comercial;Fax;Residencial;Outro" dlu="50" mandatory="true"/>
+        <property name="telefone" type="EDIT" mask="(##) #### - ####" dlu="50" mandatory="true"/>
+        <property name="descricao" label="Descricao" size="50"/>
+    </line>
+</beanDescriptor>

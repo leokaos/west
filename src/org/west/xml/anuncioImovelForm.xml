@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="anuncios" label="" type="LIST_WRAPPER" listModelClass="org.west.componentes.ListModelFactory" listModelMethod="getModelAnuncio"/>
+    </line>
+    <line> 
+        <property name="destaque" type="MASKED_COMBO" values="0;1;2" masked="Normal;Destaque;Alto Padrão" mandatory="true"/>
+        <property name="divulgar"/>  
+    </line>
+</beanDescriptor>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" readOnly="true"/>
+    </line>
+    <line>
+        <property name="endereco" label="Endereço" readOnly="true"/>
+        <property name="numero" label="Nº" readOnly="true"/>
+    </line>
+    <line>
+        <property name="foto" label="" type="IMAGE" pasta="\\servidor\Fotos\Portaria"/>
+    </line>
+    <line>
+        <property name="edificio" label="Edifício" readOnly="true"/>
+        <property name="bairro" label="Bairro" readOnly="true"/>
+    </line>
+</beanDescriptor>

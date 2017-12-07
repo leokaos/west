@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+
+    <line>
+        <property name="dorms" label="Dorms" readOnly="true" dlu="20" align="center"/>
+        <property name="garagens" label="Gars" readOnly="true" dlu="20" align="center"/>
+        <property name="suites" label="Suítes" readOnly="true" dlu="20" align="center"/>
+        <property name="banheiros" label="Banhs" readOnly="true" dlu="20" align="center"/>
+        <property name="salas"  readOnly="true" dlu="20" align="center"/>
+    </line>
+</beanDescriptor>

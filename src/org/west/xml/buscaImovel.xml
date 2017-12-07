@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="referencia" label="Referência" type="TEXT"/>
+        <property name="corretor"/>
+    </line>
+    <line>
+        <property name="tipos" label="Categoria" type="CHECKBOX_LIST" listModelClass="org.west.componentes.ListModelFactory" listModelMethod="getModelTipo"/>
+        <property name="anuncios" type="CHECKBOX_LIST" listModelClass="org.west.componentes.ListModelFactory" listModelMethod="getModelAnuncio"/>
+    </line>
+    <line>
+        <property name="endereco" label="Endereço"/>
+        <property name="proprietario" label="Proprietário"/>
+        <property name="destaque" type="MASKED_COMBO" values="0;1;2" masked="Normal;Destaque;Alto Padrão" dlu="50"/>
+    </line>    
+    <line>
+        <property name="bairro" type="CHECKBOX_LIST" listModelClass="org.west.componentes.ListModelFactory" listModelMethod="getModelBairro"/>
+        <property name="status" type="CHECKBOX_LIST" listModelClass="org.west.componentes.ListModelFactory" listModelMethod="getModelStatus"/>
+    </line>
+    <line>
+        <property name="dorms" type="INTERVAL"/>
+        <property name="suites" type="INTERVAL"/>
+    </line>
+    <line>
+        <property name="garagens" type="INTERVAL"/>
+        <property name="areaPrivativa" type="INTERVAL"/>
+    </line>
+    <line>
+        <property name="valor" type="INTERVAL"/>
+        <property name="medidas" label="Medidas do Terreno" type="MEDIDAS"/>
+    </line>
+    <line>
+        <property name="comFotos" label="Com Fotos"/>  
+        <property name="semFotos" label="Sem Fotos"/>
+        <property name="divulgar"/>
+        <property name="vago"/>        
+    </line>
+    <line>
+        <property name="capInicial" label="Captação Inicial"/>
+        <property name="capFinal" label="Captação Final"/>        
+    </line>       
+    <line>
+        <property name="dataInicial" label="Atualização Inicial"/>
+        <property name="dataFinal" label="Atualização Final"/>
+    </line>
+    <line>
+        <property name="descricao" label="Descrição"/>
+    </line>
+</beanDescriptor>

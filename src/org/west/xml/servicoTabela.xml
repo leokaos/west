@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" readOnly="true" label="Nº" columnSize="30"/>
+        <property name="pastaMae" label="Pasta Mãe" columnSize="150" readOnly="true"/>
+        <property name="cliente" readOnly="true"/>
+        <property name="nome" label="Serviço" readOnly="true" columnSize="170"/>
+        <property name="concluido" label="OK" columnSize="100" type="MASKED_COMBO" values="0;1;2" masked="Normal;Concluido;Cancelado"/>
+        <property name="token" label="Token" readOnly="true"/>
+        <property name="dataToken" label="Data" readOnly="true"/>
+    </line>
+</beanDescriptor>

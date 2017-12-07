@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="descricao" type="LARGE_TEXT" label="Descrição" mandatory="true"/>
+    </line>
+    <line>
+        <property name="usuario" label="Usuário" type="BEAN" bean="org.west.entidades.Usuario" mandatory="true"  order="nome"/>
+    </line>
+
+</beanDescriptor>

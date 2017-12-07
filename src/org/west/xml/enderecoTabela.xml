@@ -1,0 +1,5 @@
+<beanDescriptor>
+    <line>
+        <property name="logradouro" readOnly="true"/>
+    </line>
+</beanDescriptor>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="usuario" label="Usuário" type="BEAN" bean="entidades.Usuario" readOnly='true'/>
+        <property name="descricao" columnSize="230" label="Descrição" readOnly='true'/>
+        <property name="dataEntrada" format="dd/MM/yyyy HH:mm" readOnly='true'/>
+    </line>
+</beanDescriptor>

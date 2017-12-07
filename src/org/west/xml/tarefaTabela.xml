@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" columnSize="20" readOnly="true" />
+        <property name="nome" readOnly="true" columnSize="250"/>
+        <property name="previsaoTermino" label="Previsão de término" format="dd/MM/yyyy HH:mm" readOnly="true" columnSize="70"/>
+        <property name="usuario" label="Usuário" type="TEXT" readOnly="true" columnSize="40"/>
+    </line>
+</beanDescriptor>

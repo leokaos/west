@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Nº Cliente"/>
+        <property name="nome"/>
+        <property name="telefone" />        
+    </line>
+    <line>
+        <property name="inicio" format="dd/MM/yyyy"/>
+        <property name="fim" format="dd/MM/yyyy"/>
+        <property name="imovel" label="Imóvel" />
+    </line>
+    <line>
+        <property name="atendimento"/>
+        <property name="corretor" />
+    </line>
+</beanDescriptor>

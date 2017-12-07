@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="dorms" label="Dormitórios" type="EDIT" decorate="true" format="INT" mandatory="true" customValidator="org.west.componentes.ValidatorInteger"/>
+        <property name="suites" label="Suítes" type="EDIT" decorate="true" format="INT" mandatory="true"/>
+        <property name="garagens" type="EDIT" decorate="true" format="INT" mandatory="true"/>        
+        <property name="salas" type="EDIT" decorate="true" format="INT" mandatory="true" customValidator="org.west.componentes.ValidatorInteger"/>
+        <property name="banheiros" type="EDIT" decorate="true" format="INT" mandatory="true" customValidator="org.west.componentes.ValidatorInteger"/>
+        <property name="reversivel" label="Reversível?"/>
+    </line>
+    <line>
+        <property name="valor" label="Valor do Imóvel" type="DOUBLE" mandatory="true" min="1"/>
+        <property name="condominio" label="Condomínio"/>
+        <property name="edificio" label="Edifício"/>
+        <property name="iptu" label="IPTU"/>
+        <property name="andares" dlu="45"/>
+    </line>    
+    <line>
+        <property name="aptoPorAndar" label="Apto Por Andar" /> 
+        <property name="privativa" label="Área Privativa"  />
+        <property name="construido" label="Área Construida" />
+        <property name="terreno" label="Área do Terreno"  />
+        <property name="medidass" label="Medidas do Terreno" type="MEDIDAS" />
+    </line>    
+    <line>
+        <property name="descricao" label="Distribuição" type="LARGE_TEXT" mandatory="true"/>
+        <property name="obs" label="Observações" type="LARGE_TEXT"/>
+    </line>
+    <line>        
+        <property name="chave" label="Chave" type="BEAN" bean="org.west.entidades.Chave" mandatory="true" order="nome"/>
+        <property name="chaveObs" label="Observações Chave" colspan="3"/>
+        <property name="vago" mandatory="true"/>
+    </line>
+    <line>
+        <property name="proprietarios" label="Proprietários" mandatory="true" size="255" type="TEXT_ADD"/>
+    </line>
+    <line>
+        <property name="proprietarios1" label="Proprietários (adicional)" size="255" type="TEXT_ADD"/>
+    </line>
+</beanDescriptor>

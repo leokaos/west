@@ -1,0 +1,15 @@
+<beanDescriptor>
+    <line>
+        <property name="cep" type="CEP" mask="#####-###" mandatory="true" customValidator="org.west.componentes.ValidatorCep" dlu="45"/>
+        <property name="logradouro" type="SUJESTION" entity="org.west.entidades.Cep" field="descricao" mandatory="true"/>
+    </line>
+    <line>
+        <property name="numero"/>
+        <property name="complemento"/>
+    </line>
+    <line>        
+        <property name="bairro"/>
+        <property name="cidade"/>
+        <property name="uf" comboModelClass="org.west.utilitarios.ComboModels" comboModelMethod="getModelEstado"/>
+    </line>
+</beanDescriptor>

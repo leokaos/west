@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+
+    <line>
+        <property name="nome" label="Usuário"/>
+    </line>
+    
+    <line>
+        <property name="senha" type="PASSWORD"/>
+    </line>
+</beanDescriptor>

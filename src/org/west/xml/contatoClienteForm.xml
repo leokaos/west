@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="telefone1" label="Tel 1" type="TELEFONE"/>
+    </line>
+    <line>
+        <property name="telefone2" label="Tel 2" type="TELEFONE"/>
+    </line>
+    <line>
+        <property name="telefone3" label="Tel 3" type="TELEFONE"/>
+    </line>
+    <line>
+        <property name="telefone4" label="Tel 4" type="TELEFONE"/>
+    </line>
+    <line>
+        <property name="telefone5" label="Tel 5" type="TELEFONE"/>
+    </line>
+    <line>
+        <property name="email" label="E-Mail"/>
+    </line>
+</beanDescriptor>

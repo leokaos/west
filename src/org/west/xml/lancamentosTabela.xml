@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="descricao" label="Descrição" readOnly="true" columnSize="150"/>
+        <property name="entrada" readOnly="true" columnSize="5"/>
+        <property name="saida" label="Saída" readOnly="true" columnSize="5"/>
+        <property name="servico" readOnly="true" columnSize="150"/>
+    </line>
+</beanDescriptor>

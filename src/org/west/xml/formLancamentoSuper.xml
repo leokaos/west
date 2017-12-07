@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" readOnly="true"/>
+    </line>
+    <line>
+        <property name="descricao" label="Descrição" mandatory="true"/>
+    </line>
+    <line>
+        <property name="entrada" label="Valor de entrada em R$" type="DOUBLE" mandatory="true"/>
+    </line>
+    <line>
+        <property name="saida" label="Valor de saída em R$" type="DOUBLE" mandatory="true"/>
+    </line>
+    <line>
+        <property name="dataLancamento" label="Data do Lançamento" mandatory="true"/>
+    </line>
+    <line>
+        <property name="servico" label="Serviço" type="BEAN" bean="org.west.entidades.Servico" mandatory="true" dlu="120"/>
+    </line>
+    <line>
+        <property name="usuario" label="Usuário" type="BEAN" bean="org.west.entidades.Usuario" mandatory="true" query="status=1" dlu="120"/>
+    </line>
+    <line>
+        <property name="area" label="Área" type="COMBO"
+            comboModelMethod="getModelArea" comboModelClass="org.west.componentes.ListModelFactory" />
+    </line>
+</beanDescriptor>

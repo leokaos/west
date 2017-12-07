@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" dlu="55" readOnly="true" />
+        <property name="usuario" label="Usuário" readOnly="true" dlu="55"/>
+    </line>
+    <line>
+        <property name="nome" mandatory="true"/>
+    </line>
+    <line>
+        <property name="dataInicio" label="Data de início" format="dd/MM/yyyy HH:mm" mandatory="true"/>
+        <property name="previsaoTermino" label="Previsão de término" format="dd/MM/yyyy HH:mm" mandatory="true"/>
+    </line>
+    <line>
+        <property name="descricao" label="Descrição" type="TEXTAREA_LOCK" mandatory="true"/>
+    </line>
+    <line>
+        <property name="textoAdd" label="Adicionar Entrada (Para adicionar dê 2 cliques)" type="TEXTAREA_LOCK" editable="true"/>
+    </line>
+    <line>
+        <property name="servico" label="Serviço" type="BEAN" dlu="180" bean="org.west.entidades.Servico" mandatory="true" query="concluido=0"/>
+    </line>    
+    <line>
+        <property name="aviso" label="Avisar em" mandatory="true" type="MASKED_COMBO" model="org.west.utilitarios.ModelPeriodo" objetos="getObsj"/>
+        <property name="valor" type="EDIT" label="Valor em R$" format="DOUBLE" mandatory="true"/>
+    </line>
+    <line>
+        <property name="terminado" label="Terminado?"/>
+    </line>
+</beanDescriptor>

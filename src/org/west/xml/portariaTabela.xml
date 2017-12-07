@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" readOnly="true" columnSize="5"/>
+        <property name="cep" type="TEXT" label="Endereço" readOnly="true" columnSize="200"/>
+        <property name="numero" label="Número" readOnly="true" columnSize="30"/>
+        <property name="edificio" label="Edifício" readOnly="true" columnSize="50"/>
+        <property name="quantidadeImovel" label="Imóveis na portaria" readOnly="true" columnSize="30"/>
+        <property name="ultimaData" label="Ultima Visita" readOnly="true" columnSize="30"/>
+        <property name="usuario" label="Corretor" readOnly="true"/>
+    </line>
+</beanDescriptor>

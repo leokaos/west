@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" type="HIDDEN" label="" dlu="0" colspan="0"/>
+        <property name="email" size="100"/>
+    </line>
+</beanDescriptor>

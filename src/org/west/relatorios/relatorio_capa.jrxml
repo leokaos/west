@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_capa" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" isFloatColumnFooter="true">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.2100000000000035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="499"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DATA_RELATORIO" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.awt.Image"/>
+	<queryString>
+		<![CDATA[select
+	S.nome as nome,
+	S.codigo as codigo,
+	S.endereco as endereco,
+	S.nome as compradores,
+	S.nome as vendedores,
+	U.nome as responsavel_nome,
+	S.dataEntrada as dataEntrada,
+	S.formaPagamento as formaPagamento,
+	S.obs as obs,
+	S.telefone as telefone,
+	S.cliente as cliente,
+  	(select sum(valor) from tab_tarefas where servico = S.codigo group by servico) as valorBruto,
+  	(select sum(entrada) - sum(saida) from tab_lancamentos where servico = S.codigo group by servico) as valorLancamentos
+
+from tab_servico S
+
+	inner join tab_usuario U on U.codigo = S.responsavel
+
+where S.codigo = 219;]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.Long"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="compradores" class="java.lang.String"/>
+	<field name="vendedores" class="java.lang.String"/>
+	<field name="responsavel_nome" class="java.lang.String"/>
+	<field name="dataEntrada" class="java.sql.Timestamp"/>
+	<field name="formaPagamento" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="valorBruto" class="java.lang.Double"/>
+	<field name="valorLancamentos" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="8" y="7" width="529" height="80"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-5" x="8" y="5" width="126" height="17" forecolor="#2A5F45"/>
+				<textElement textAlignment="Left">
+					<font fontName="Verdana" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capa de Serviço]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="374" y="4" width="163" height="61" forecolor="#2A5F45"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-5" x="390" y="6" width="131" height="16" forecolor="#2A5F45"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº do Cliente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="30" width="131" height="23" forecolor="#2A5F45"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="30" width="56" height="11" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Origem:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="45" width="315" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[(   ) Imobiliária    (   ) Construtora  (  ) Outros: _______________________]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="579">
+			<staticText>
+				<reportElement x="8" y="316" width="82" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="316" width="452" height="20" forecolor="#2A5F45"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Verdana" size="10" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="410" width="154" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma de Pagamento:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="8" y="431" width="544" height="106" forecolor="#2A5F45"/>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="15" y="434" width="529" height="100" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{formaPagamento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="550" width="104" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Soma Tarefas:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="112" y="550" width="148" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{valorBruto} == null) ? "0,00" : $F{valorBruto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="288" y="550" width="102" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Liquido:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement x="390" y="550" width="157" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{valorLancamentos} == null) ? "0,00" : $F{valorLancamentos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm" isBlankWhenNull="true">
+				<reportElement x="146" y="352" width="406" height="47" forecolor="#2A5F45"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Verdana" size="10" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="352" width="138" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informações Gerais:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="42" width="82" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprador:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="170" width="82" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendedor:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="12" width="262" height="20" forecolor="#2A5F45"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Verdana" size="10" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="12" width="82" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serviço:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm" isBlankWhenNull="true">
+				<reportElement x="461" y="12" width="91" height="20" forecolor="#2A5F45"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Verdana" size="8" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataEntrada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="374" y="12" width="87" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de entrada:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="42" width="452" height="114" forecolor="#2A5F45"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Verdana" size="10" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compradores}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="170" width="452" height="129" forecolor="#2A5F45"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Verdana" size="10" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendedores}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="49" splitType="Stretch">
+			<line>
+				<reportElement x="8" y="14" width="252" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="8" y="21" width="252" height="20" forecolor="#2A5F45"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Responsável: " + $F{responsavel_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

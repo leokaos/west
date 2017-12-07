@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="portaria" label="" type="BEAN" bean="org.west.entidades.Portaria" order="cep.descricao" join="cep,cep"/>
+    </line>
+</beanDescriptor>

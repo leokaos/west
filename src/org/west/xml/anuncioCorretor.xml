@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="referencia" label="Referência" readOnly="true"/>
+        <property name="enderecoCompleto" label="Endereço" readOnly="true" columnSize="320"/>
+        <property name="anunciado" label="Anunciar"/>
+    </line>
+</beanDescriptor>

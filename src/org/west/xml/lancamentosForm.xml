@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="descricao" label="Descrição" mandatory="true" type="COMBO_DESCRICAO"/>
+    </line>
+    <line>
+        <property name="entrada" label="Valor de entrada em R$" mandatory="true"/>
+    </line>
+    <line>
+        <property name="saida" label="Valor de saída em R$" mandatory="true"/>
+    </line>
+    <line>
+        <property name="servico" label="Serviço" type="BEAN" dlu="100" bean="org.west.entidades.Servico" mandatory="true" query="concluido=0"/>
+    </line>
+</beanDescriptor>

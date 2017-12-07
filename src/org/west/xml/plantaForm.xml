@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" readOnly="true" colspan="2"/>
+    </line>
+    <line>
+        <property name="suites" type="SPINNER" dlu="60"/>
+        <property name="dorms" type="SPINNER" label="Dormitórios" mandatory="true" dlu="60"/>
+    </line>
+    <line>
+        <property name="vagas" type="SPINNER" label="Garagens" dlu="60"/>
+        <property name="privativa" label="Área Privativa" mandatory="true" dlu="60"/>
+    </line>
+    <line>
+        <property name="salas" type="SPINNER" mandatory="true" dlu="60"/>
+        <property name="banheiros" type="SPINNER" mandatory="true" dlu="60" customValidator="org.west.componentes.ValidatorInteger"/>
+    </line>
+    <line>
+        <property name="reversivel" type="SPINNER" dlu="60"/>  
+    </line>    
+    <line>
+        <property name="andares" type="SPINNER" mandatory="true" dlu="60" customValidator="org.west.componentes.ValidatorInteger"/>
+        <property name="aptoPorAndar" type="SPINNER" mandatory="true" dlu="60" customValidator="org.west.componentes.ValidatorInteger"/>    
+    </line>
+</beanDescriptor>

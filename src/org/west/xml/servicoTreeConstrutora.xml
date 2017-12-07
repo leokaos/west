@@ -1,0 +1,8 @@
+<beanDescriptor>
+    <line>
+        <property name="tree" type="TREE" label="Tarefas" classifyBy="servico" rootName="Serviços" columnSize="400"/>
+        <property name="dataInicio" label="Data de Início" readOnly="true" format="dd/MM/yyyy"/>
+        <property name="previsaoTermino" label="Previsão de Termino" readOnly="true" format="dd/MM/yyyy"/>
+        <property name="usuario" label="Usuário" columnSize="40" readOnly="true"/>
+    </line>
+</beanDescriptor>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" dlu="55" readOnly="true" />
+        <property name="nome" mandatory="true"/>
+    </line>
+    <line>
+        <property name="dataInicio" label="Data de início" format="dd/MM/yyyy HH:mm" mandatory="true"/>
+        <property name="previsaoTermino" label="Previsão de término" format="dd/MM/yyyy HH:mm" mandatory="true"/>
+        <property name="dataTermino" label="Data Término" format="dd/MM/yyyy HH:mm"/>
+    </line>
+    <line>
+        <property name="descricao" label="Descrição" type="LARGE_TEXT" mandatory="true"/>
+    </line>
+    <line>
+        <property name="servico" label="Serviço" type="BEAN" dlu="180" bean="org.west.entidades.Servico" mandatory="true" query="concluido=0"/>
+    </line>    
+    <line>
+        <property name="aviso" label="Avisar em" type="MASKED_COMBO" model="org.west.utilitarios.ModelPeriodo" objetos="getObsj" mandatory="true"/>
+        <property name="usuario" label="Usuário" type="BEAN" bean="org.west.entidades.Usuario" mandatory="true"/>
+        <property name="valor" label="Valor em R$" type="DOUBLE" mandatory="true"/>
+        <property name="terminado"/>
+    </line>
+</beanDescriptor>

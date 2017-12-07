@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" label="Código" readOnly="true"/>
+        <property name="cep" label="Endereço" type="LABEL"/>
+        <property name="numero" label="Número" readOnly="true"/>
+        <property name="edificio" label="Edifício" readOnly="true"/>
+    </line>
+</beanDescriptor>

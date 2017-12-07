@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="codigo" Label="Código" readOnly="true" dlu="55"/>
+    </line>
+    <line>
+        <property name="nome"/>
+    </line>
+    <line>
+        <property name="telefone1" label="Tel 1" type="TELEFONE" dlu="150"/>
+    </line>
+    <line>
+        <property name="telefone2" label="Tel 2" type="TELEFONE" dlu="150"/>
+    </line>
+    <line>
+        <property name="telefone3" label="Tel 3" type="TELEFONE" dlu="150"/>
+    </line>
+    <line>
+        <property name="telefone4" label="Tel 4" type="TELEFONE" dlu="150"/>
+    </line>
+    <line>
+        <property name="telefone5" label="Tel 5" type="TELEFONE" dlu="150"/>
+    </line>
+    <line>
+        <property name="email" label="E-Mail"/>
+    </line>
+    <line>
+        <property name="obs" label="Observações" type="LARGE_TEXT"/>
+    </line>
+</beanDescriptor>

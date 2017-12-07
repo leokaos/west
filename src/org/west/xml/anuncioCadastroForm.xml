@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="nome" label="Nome de exibição" mandatory="true"/>
+    </line>
+    <line>
+        <property name="veiculo" label="Veículo" type="BEAN" bean="org.west.entidades.Veiculo" mandatory="true"/>
+    </line>
+    <line>
+        <property name="usado" label="Tem prioridade na exibição." mandatory="true"/>
+    </line>
+    <line>
+        <property name="liberavel" label="Exige liberação do supervisor." mandatory="true"/>
+    </line>
+    <line>
+        <property name="informacaoAdicional" label="Exige informações adicionais." mandatory="true"/>
+    </line>
+</beanDescriptor>

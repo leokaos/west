@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beanDescriptor>
+    <line>
+        <property name="lazer" label="Lazeres" type="LISTA"/>
+    </line>
+</beanDescriptor>
